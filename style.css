@@ -1,0 +1,78 @@
+/* 1. RESET E IMPOSTAZIONI DI BASE */
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #ffffff; /* Sfondo pulito */
+    color: #1a1a1a;
+    overflow: hidden; /* Fondamentale per bloccare lo scroll verticale */
+}
+
+/* 2. HEADER E LOGO */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none; /* Permette di cliccare attraverso l'header se necessario */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    pointer-events: auto;
+}
+
+/* 3. CONTENITORE DELLA GALLERIA */
+.gallery {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: auto; /* Abilita lo scroll orizzontale */
+    scroll-snap-type: x mandatory; /* Effetto "calamita" sulle foto */
+    scrollbar-width: none; /* Nasconde scrollbar su Firefox */
+    -ms-overflow-style: none; /* Nasconde scrollbar su Edge */
+}
+
+.gallery::-webkit-scrollbar {
+    display: none; /* Nasconde scrollbar su Chrome/Safari */
+}
+
+/* 4. LE SEZIONI DELLE FOTO */
+.item {
+    flex: 0 0 auto;
+    width: 100vw; /* Ogni sezione occupa tutta la larghezza */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: center; /* Centra la foto quando ti fermi */
+    padding: 0 10vw; /* Margini laterali generosi per l'estetica */
+}
+
+.item img {
+    height: auto;
+    max-height: 70vh; /* La foto non tocca mai i bordi sopra/sotto */
+    max-width: 100%;
+    object-fit: contain;
+    /* Transizione morbida se aggiungi hover */
+    transition: transform 0.5s ease;
+}
+
+/* Effetto zoom leggero al passaggio del mouse (opzionale) */
+.item img:hover {
+    transform: scale(1.02);
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Mio Portfolio Orizzontale</title>
+    <style>
+        /* RESET E BASE */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfcfc;
+            overflow: hidden; /* Blocca lo scroll verticale */
+        }
+
+        /* HEADER MINIMALE */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 40px;
+            z-index: 10;
+        }
+
+        h1 { font-size: 1.2rem; font-weight: 400; letter-spacing: 1px; }
+
+        /* CONTENITORE GALLERIA */
+        .gallery {
+            display: flex;
+            height: 100vh;
+            overflow-x: auto; /* Permette lo scroll orizzontale */
+            scroll-snap-type: x mandatory; /* Effetto calamita */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Nasconde la barra di scorrimento */
+        .gallery::-webkit-scrollbar { display: none; }
+        .gallery { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* SINGOLA SEZIONE FOTO */
+        .item {
+            flex: 0 0 auto;
+            width: 100vw; /* Ogni "slide" è larga quanto lo schermo */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            scroll-snap-align: start;
+        }
+
+        .item img {
+            max-height: 75vh;
+            max-width: 80vw;
+            object-fit: contain;
+            /* L'effetto ombra leggera tipico dei portfolio premium */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>IL TUO NOME / PORTFOLIO</h1>
+    </header>
+
+    <main class="gallery" id="gallery">
+        <section class="item">
+            <img src="images/foto1.jpg" alt="Descrizione Foto 1">
+        </section>
+
+        <section class="item">
+            <img src="images/foto2.jpg" alt="Descrizione Foto 2">
+        </section>
+
+        <section class="item">
+            <img src="images/foto3.jpg" alt="Descrizione Foto 3">
+        </section>
+    </main>
+
+    <script>
+        // Questo script trasforma lo scroll verticale del mouse in orizzontale
+        const gallery = document.getElementById('gallery');
+        gallery.addEventListener('wheel', (evt) => {
+            evt.preventDefault();
+            gallery.scrollLeft += evt.deltaY;
+        });
+    </script>
+</body>
+</html>

@@ -2,90 +2,41 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Mio Portfolio Orizzontale</title>
-    <style>
-        /* RESET E BASE */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Inter', sans-serif;
-            background-color: #fcfcfc;
-            overflow: hidden; /* Blocca lo scroll verticale */
-        }
-
-        /* HEADER MINIMALE */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 40px;
-            z-index: 10;
-        }
-
-        h1 { font-size: 1.2rem; font-weight: 400; letter-spacing: 1px; }
-
-        /* CONTENITORE GALLERIA */
-        .gallery {
-            display: flex;
-            height: 100vh;
-            overflow-x: auto; /* Permette lo scroll orizzontale */
-            scroll-snap-type: x mandatory; /* Effetto calamita */
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* Nasconde la barra di scorrimento */
-        .gallery::-webkit-scrollbar { display: none; }
-        .gallery { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* SINGOLA SEZIONE FOTO */
-        .item {
-            flex: 0 0 auto;
-            width: 100vw; /* Ogni "slide" è larga quanto lo schermo */
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            scroll-snap-align: start;
-        }
-
-        .item img {
-            max-height: 75vh;
-            max-width: 80vw;
-            object-fit: contain;
-            /* L'effetto ombra leggera tipico dei portfolio premium */
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <title>Portfolio</title>
 </head>
 <body>
 
-    <header>
-        <h1>Snapbygio | Portfolio</h1>
+    <header style="position: fixed; padding: 30px;">
+        <h1>Snapbygio</h1>
     </header>
 
     <main class="gallery" id="gallery">
-        <section class="item">
-            <img src="images/foto1.jpg" alt="Descrizione Foto 1">
-        </section>
-
-        <section class="item">
-            <img src="images/foto2.jpg" alt="Descrizione Foto 2">
-        </section>
-
-        <section class="item">
-            <img src="images/foto3.jpg" alt="Descrizione Foto 3">
-        </section>
+        <div class="item"><img src="images/foto1.jpg" onclick="openLightbox(this.src)"></div>
+        <div class="item"><img src="images/foto2.jpg" onclick="openLightbox(this.src)"></div>
+        <div class="item"><img src="images/foto3.jpg" onclick="openLightbox(this.src)"></div>
     </main>
 
+    <div id="lightbox" onclick="this.style.display='none'">
+        <img id="lightbox-img" src="">
+    </div>
+
     <script>
-        // Questo script trasforma lo scroll verticale del mouse in orizzontale
         const gallery = document.getElementById('gallery');
+        
+        // 1. Scroll con rotella
         gallery.addEventListener('wheel', (evt) => {
             evt.preventDefault();
             gallery.scrollLeft += evt.deltaY;
         });
+
+        // 2. Funzione per ingrandire
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightbox-img');
+            lbImg.src = src;
+            lb.style.display = 'flex';
+        }
     </script>
 </body>
 </html>
